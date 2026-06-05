@@ -325,28 +325,49 @@ function generateTineCurve(){
   return curve;
 }
 function playTine(){
-  if(!audioCtx||state!==S.ACTIVE)return;
-  const now=audioCtx.currentTime;
-  const freq=tineWeightedChoice(TINE_SCALE,recentTine);
-  recentTine.unshift(freq);if(recentTine.length>5)recentTine.pop();
-  const shaper=audioCtx.createWaveShaper();
-  shaper.curve=generateTineCurve();
-  const lp=audioCtx.createBiquadFilter();
-  lp.type='lowpass';lp.frequency.value=680;lp.Q.value=0.2;
-  shaper.connect(lp);lp.connect(masterGain);
-  const osc=audioCtx.createOscillator(),g=audioCtx.createGain();
-  osc.type='sine';
-  osc.frequency.setValueAtTime(freq,now);
-  g.gain.setValueAtTime(0,now);
-  g.gain.linearRampToValueAtTime(0.04,now+0.025); // 25ms — eliminates ttt click artifact
-  g.gain.exponentialRampToValueAtTime(0.0001,now+2.4+Math.random()*2);
-  const panTine=audioCtx.createStereoPanner?audioCtx.createStereoPanner():null;
-  if(panTine){panTine.pan.value=-0.05;lp.connect(panTine);panTine.connect(masterGain);shaper.connect(lp);}
-  else{shaper.connect(lp);lp.connect(masterGain);}
-  osc.connect(g);g.connect(shaper);
-  osc.start(now);osc.stop(now+5);
-  osc.onended=()=>{osc.disconnect();g.disconnect();shaper.disconnect();lp.disconnect();if(panTine)panTine.disconnect();};
-  flash=Math.min(flash+0.03,0.20);
+  if(!audioCtx || state !== S.ACTIVE) return;
+  const now = audioCtx.currentTime;
+  const freq = tineWeightedChoice(TINE_SCALE, recentTine);
+  recentTine.unshift(freq);
+  if(recentTine.length > 5) recentTine.pop();
+  const osc = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  const shaper = audioCtx.createWaveShaper();
+  const lp = audioCtx.createBiquadFilter();
+  const panTine = audioCtx.createStereoPanner ? audioCtx.createStereoPanner() : null;
+  osc.type = 'sine';
+  osc.frequency.setValueAtTime(freq, now);
+  shaper.curve = generateTineCurve();
+  lp.type = 'lowpass';
+  lp.frequency.setValueAtTime(680, now);
+  lp.Q.setValueAtTime(0.2, now);
+  if(panTine){
+    panTine.pan.setValueAtTime((Math.random() - 0.5) * 0.24, now);
+  }
+  // iOS-safe envelope — cancelScheduledValues prevents discontinuity
+  g.gain.cancelScheduledValues(now);
+  g.gain.setValueAtTime(0.0001, now);
+  g.gain.linearRampToValueAtTime(0.04, now + 0.025);
+  g.gain.exponentialRampToValueAtTime(0.0001, now + 2.4 + Math.random() * 2);
+  osc.connect(g);
+  g.connect(shaper);
+  shaper.connect(lp);
+  if(panTine){
+    lp.connect(panTine);
+    panTine.connect(masterGain);
+  } else {
+    lp.connect(masterGain);
+  }
+  osc.start(now);
+  osc.stop(now + 5.4);
+  osc.onended = () => {
+    osc.disconnect();
+    g.disconnect();
+    shaper.disconnect();
+    lp.disconnect();
+    if(panTine) panTine.disconnect();
+  };
+  flash = Math.min(flash + 0.025, 0.18);
 }
 function scheduleTine(gen){
   if(gen!==tineGen||state!==S.ACTIVE)return;
