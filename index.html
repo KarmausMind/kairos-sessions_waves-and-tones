@@ -338,7 +338,7 @@ function playTine(){
   osc.type='sine';
   osc.frequency.setValueAtTime(freq,now);
   g.gain.setValueAtTime(0,now);
-  g.gain.linearRampToValueAtTime(0.04,now+0.005);
+  g.gain.linearRampToValueAtTime(0.04,now+0.025); // 25ms — eliminates ttt click artifact
   g.gain.exponentialRampToValueAtTime(0.0001,now+2.4+Math.random()*2);
   const panTine=audioCtx.createStereoPanner?audioCtx.createStereoPanner():null;
   if(panTine){panTine.pan.value=-0.05;lp.connect(panTine);panTine.connect(masterGain);shaper.connect(lp);}
