@@ -72,22 +72,115 @@ body.session-active #ambientBackdrop{will-change:background;}
 .controls-label:hover{color:rgba(240,237,232,0.95)}
 .strip-sep{width:1px;height:12px;background:rgba(255,255,255,0.12);}
 
-.drawer-time{width:100%;text-align:center;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;color:var(--dim);margin-bottom:4px;font-variant-numeric:tabular-nums;}
-.drawer{position:fixed;bottom:0;left:0;right:0;z-index:150;background:rgba(5,6,11,0.88);backdrop-filter:blur(48px);-webkit-backdrop-filter:blur(48px);border-top:1px solid rgba(255,255,255,0.06);padding-top:28px;padding-left:max(32px,env(safe-area-inset-left));padding-right:max(32px,env(safe-area-inset-right));padding-bottom:max(36px,env(safe-area-inset-bottom));display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:18px 32px;transform:translateY(100%);transition:transform 0.48s cubic-bezier(0.2,0.9,0.4,1);pointer-events:none;}
-.drawer.open{transform:translateY(0);pointer-events:auto}
-.d-btn{background:transparent;border:none;font-family:var(--mono);font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);cursor:pointer;padding:12px 14px;min-height:44px;border-radius:3px;transition:background 0.18s,color 0.18s;}
+.drawer-time{
+width:auto;
+text-align:center;
+font-family:var(--mono);
+font-size:9px;
+letter-spacing:0.10em;
+color:rgba(240,237,232,0.30);
+margin:0 4px 0 0;
+font-variant-numeric:tabular-nums;
+white-space:nowrap;
+}
+.drawer{
+position:fixed;
+left:50%;
+right:auto;
+bottom:max(22px,env(safe-area-inset-bottom));
+width:auto;
+max-width:calc(100vw - 28px);
+z-index:150;
+background:rgba(5,6,11,0.24);
+backdrop-filter:blur(14px);
+-webkit-backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.035);
+border-radius:999px;
+padding:8px 12px;
+display:flex;
+flex-wrap:nowrap;
+justify-content:center;
+align-items:center;
+gap:10px;
+transform:translate(-50%,calc(100% + 28px));
+opacity:0;
+transition:transform 0.34s cubic-bezier(0.2,0.9,0.4,1),opacity 0.24s ease;
+pointer-events:none;
+box-shadow:none;
+}
+.drawer.open{
+transform:translate(-50%,0);
+opacity:1;
+pointer-events:auto;
+}
+.d-btn{
+background:transparent;
+border:none;
+font-family:var(--mono);
+font-size:8px;
+letter-spacing:0.13em;
+text-transform:uppercase;
+color:rgba(240,237,232,0.48);
+cursor:pointer;
+padding:7px 8px;
+min-height:30px;
+border-radius:999px;
+transition:background 0.18s,color 0.18s;
+white-space:nowrap;
+}
 .d-btn:hover{background:rgba(255,255,255,0.06);color:var(--ink)}
 .d-btn.restore{color:var(--gold-dim);font-size:9px;letter-spacing:0.2em;}
 .d-btn.restore:hover{color:var(--gold);background:rgba(212,185,140,0.06)}
-.mode-group{display:flex;gap:5px}
-.mode-btn{background:transparent;border:0.5px solid rgba(255,255,255,0.10);border-radius:3px;padding:6px 14px;font-family:var(--mono);font-size:9px;letter-spacing:0.1em;color:var(--dim);cursor:pointer;transition:all 0.18s;}
+.mode-group{display:flex;gap:4px}
+.mode-btn{
+background:transparent;
+border:0.5px solid rgba(255,255,255,0.08);
+border-radius:999px;
+padding:5px 10px;
+font-family:var(--mono);
+font-size:8px;
+letter-spacing:0.08em;
+color:rgba(240,237,232,0.32);
+cursor:pointer;
+transition:all 0.18s;
+}
 .mode-btn.active{background:rgba(212,185,140,0.07);border-color:var(--gold-dim);color:var(--gold);}
 .mode-btn:hover:not(.active){border-color:rgba(255,255,255,0.22);color:var(--muted)}
-.sl-group{display:flex;align-items:center;gap:10px}
-.sl-label{font-family:var(--mono);font-size:8px;letter-spacing:0.14em;text-transform:uppercase;color:var(--dim);min-width:28px;}
-input[type="range"]{-webkit-appearance:none;width:100px;height:1px;background:rgba(255,255,255,0.20);border-radius:1px;outline:none;}
-input[type="range"]::-webkit-slider-thumb{-webkit-appearance:none;width:9px;height:9px;border-radius:50%;background:rgba(240,237,232,0.90);cursor:pointer;box-shadow:0 0 6px rgba(240,237,232,0.35);}
-input[type="range"]::-moz-range-thumb{width:9px;height:9px;border-radius:50%;background:rgba(240,237,232,0.90);cursor:pointer;box-shadow:0 0 6px rgba(240,237,232,0.35);border:none;}
+.sl-group{display:flex;align-items:center;gap:6px}
+.sl-label{
+font-family:var(--mono);
+font-size:7px;
+letter-spacing:0.12em;
+text-transform:uppercase;
+color:rgba(240,237,232,0.26);
+min-width:22px;
+}
+input[type="range"]{
+-webkit-appearance:none;
+width:72px;
+height:1px;
+background:rgba(255,255,255,0.18);
+border-radius:1px;
+outline:none;
+}
+input[type="range"]::-webkit-slider-thumb{
+-webkit-appearance:none;
+width:8px;
+height:8px;
+border-radius:50%;
+background:rgba(240,237,232,0.82);
+cursor:pointer;
+box-shadow:0 0 5px rgba(240,237,232,0.25);
+}
+input[type="range"]::-moz-range-thumb{
+width:8px;
+height:8px;
+border-radius:50%;
+background:rgba(240,237,232,0.82);
+cursor:pointer;
+box-shadow:0 0 5px rgba(240,237,232,0.25);
+border:none;
+}
 @media(prefers-reduced-motion: reduce){
   canvas{display:none!important;}
   #ambientBackdrop{animation:none;}
@@ -98,8 +191,11 @@ input[type="range"]::-moz-range-thumb{width:9px;height:9px;border-radius:50%;bac
 @media(max-width:840px){
   .gateway{padding:44px 36px 40px;width:calc(100% - 40px)}
   .headline{font-size:clamp(38px,8vw,44px)}
-  .drawer{gap:14px 22px;padding-top:22px;padding-left:22px;padding-right:22px;padding-bottom:max(28px,env(safe-area-inset-bottom))}
+  .drawer{max-width:calc(100vw - 24px);padding:14px 14px;gap:10px 14px;bottom:max(18px,env(safe-area-inset-bottom))}
   input[type="range"]{width:80px}
+}
+@media(max-width:600px){
+  .drawer{flex-wrap:wrap;justify-content:center;gap:10px;max-width:calc(100vw - 20px);}
 }
 </style>
 </head>
@@ -152,7 +248,7 @@ input[type="range"]::-moz-range-thumb{width:9px;height:9px;border-radius:50%;bac
     <button class="mode-btn" data-mode="deep">Deep</button>
     <button class="mode-btn" data-mode="museum">Museum</button>
   </div>
-  <div class="sl-group"><span class="sl-label">Vol</span><input type="range" id="volSlider" min="0" max="100" value="65" step="1"></div>
+  <div class="sl-group"><span class="sl-label">Vol</span><input type="range" id="volSlider" min="0" max="100" value="82" step="1"></div>
   <div class="sl-group"><span class="sl-label">Tone</span><input type="range" id="toneSlider" min="0" max="100" value="48" step="1"></div>
   <div class="sl-group"><span class="sl-label">Light</span><input type="range" id="lightSlider" min="20" max="100" value="72" step="1"></div>
   <button class="d-btn" id="pauseBtn">⏸ Pause</button>
@@ -175,7 +271,7 @@ const gateway=document.getElementById('gateway'),header=document.getElementById(
 const particleCanvas=document.getElementById('particleCanvas'),fireworkCanvas=document.getElementById('fireworkCanvas'),glowCanvas=document.getElementById('glowCanvas');
 let ctxP,ctxF,ctxG,W,H,dpr,cx,cy;
 
-let sessionMinutes=10,sessionMsRemain=0,sessionTotalMs=0,sessionElapsedMs=0,timerStartWall=0,timerRafId=null,drawerOpen=false,lightVal=72,volVal=65;
+let sessionMinutes=10,sessionMsRemain=0,sessionTotalMs=0,sessionElapsedMs=0,timerStartWall=0,timerRafId=null,drawerOpen=false,lightVal=72,volVal=82;
 let timeline=0,globalHue=208,targetHue=208,energy=0,flash=0,audioVelocityPulse=0,globalAlpha=1,lastT=0,bgThrottle=0,bgDirty=true,cachedGradG=null,cachedGradHue=-999;
 
 const MODES={calm:{count:4500,hue:208},deep:{count:8000,hue:260},museum:{count:12000,hue:190}};
@@ -270,6 +366,7 @@ let melNoteCount=0,inSilence=false,silenceTimer=null;
 const MEL=[220,261.63,293.66,329.63,392,440]; // A3-A4 — full pentatonic, warm ceiling
 const BASS=[55,65.41,82.41,110];
 const DESTELLO_ROOTS=[220,261.63,293.66,329.63,440];
+const MASTER_CEILING = 0.78;
 
 function uniqueNote(pool,recent){
   let av=pool.filter(n=>!recent.includes(n));
@@ -344,11 +441,12 @@ function playTine(){
   if(panTine){
     panTine.pan.setValueAtTime((Math.random() - 0.5) * 0.24, now);
   }
-  // iOS-safe envelope — cancelScheduledValues prevents discontinuity
+  // iOS-safe envelope — no click, slower attack, soft shoulder, longer decay
   g.gain.cancelScheduledValues(now);
   g.gain.setValueAtTime(0.0001, now);
-  g.gain.linearRampToValueAtTime(0.04, now + 0.025);
-  g.gain.exponentialRampToValueAtTime(0.0001, now + 2.4 + Math.random() * 2);
+  g.gain.linearRampToValueAtTime(0.032, now + 0.055);
+  g.gain.linearRampToValueAtTime(0.030, now + 0.11);
+  g.gain.exponentialRampToValueAtTime(0.0001, now + 4.2 + Math.random() * 2.2);
   osc.connect(g);
   g.connect(shaper);
   shaper.connect(lp);
@@ -359,7 +457,7 @@ function playTine(){
     lp.connect(masterGain);
   }
   osc.start(now);
-  osc.stop(now + 5.4);
+  osc.stop(now + 5.8);
   osc.onended = () => {
     osc.disconnect();
     g.disconnect();
@@ -367,7 +465,7 @@ function playTine(){
     lp.disconnect();
     if(panTine) panTine.disconnect();
   };
-  flash = Math.min(flash + 0.025, 0.18);
+  flash = Math.min(flash + 0.018, 0.14);
 }
 function scheduleTine(gen){
   if(gen!==tineGen||state!==S.ACTIVE)return;
@@ -441,7 +539,10 @@ function killAudio(){
   tineGen++;clearTimeout(tineTimer);recentTine=[];
   if(audioCtx&&audioCtx._lfo){try{audioCtx._lfo.stop();audioCtx._lfo.disconnect();}catch(e){}try{if(audioCtx._lfoGain)audioCtx._lfoGain.disconnect();}catch(e){}delete audioCtx._lfo;delete audioCtx._lfoGain;}
 }
-function setVolume(active){if(!masterGain||!audioCtx)return;masterGain.gain.setTargetAtTime(active?(volVal/100)*0.35:0,audioCtx.currentTime,0.15);}
+function setVolume(active){
+  if(!masterGain || !audioCtx) return;
+  masterGain.gain.setTargetAtTime(active ? (volVal / 100) * MASTER_CEILING : 0, audioCtx.currentTime, 0.18);
+}
 function setTimbre(){if(!filterNode||!audioCtx)return;filterNode.frequency.setValueAtTime(450+(toneSlider.value/100)*1400,audioCtx.currentTime);}
 
 // ── TIMER ─────────────────────────────────────────────────────────────────────
@@ -462,7 +563,10 @@ function beginSession(){
   setTimeout(()=>document.body.classList.add('session-active'),400);
   initAudio();if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume();
   recentMel=[];recentBass=[];setTimbre();
-  if(masterGain&&audioCtx){masterGain.gain.setValueAtTime(0,audioCtx.currentTime);masterGain.gain.linearRampToValueAtTime((volVal/100)*0.35,audioCtx.currentTime+2.5);}
+  if(masterGain&&audioCtx){
+    masterGain.gain.setValueAtTime(0,audioCtx.currentTime);
+    masterGain.gain.linearRampToValueAtTime((volVal/100)*MASTER_CEILING,audioCtx.currentTime+2.5);
+  }
   melNoteCount=0;inSilence=false;
   const gen=++audioGen;
   playMel();setTimeout(()=>playBass(),1500+Math.random()*1500);
@@ -503,9 +607,29 @@ function resetToIdle(){
   setTimeout(()=>beginBtn.classList.add('visible'),550);
 }
 let lastFocus=null;
+let drawerAutoHideTimer=null;
+function resetDrawerAutoHide(){
+  clearTimeout(drawerAutoHideTimer);
+  if(drawerOpen){
+    drawerAutoHideTimer=setTimeout(()=>closeDrawer(),5000);
+  }
+}
 function toggleDrawer(){drawerOpen?closeDrawer():openDrawer();}
-function openDrawer(){drawerOpen=true;drawer.classList.add('open');lastFocus=document.activeElement;const first=drawer.querySelector('.d-btn,.mode-btn,input');if(first)first.focus();}
-function closeDrawer(){drawerOpen=false;drawer.classList.remove('open');if(lastFocus&&typeof lastFocus.focus==='function')lastFocus.focus();lastFocus=null;}
+function openDrawer(){
+  drawerOpen=true;
+  drawer.classList.add('open');
+  bottomStrip.classList.remove('visible');
+  lastFocus=document.activeElement;
+  resetDrawerAutoHide();
+}
+function closeDrawer(){
+  drawerOpen=false;
+  drawer.classList.remove('open');
+  bottomStrip.classList.add('visible');
+  clearTimeout(drawerAutoHideTimer);
+  drawerAutoHideTimer=null;
+  lastFocus=null;
+}
 function setMode(m){currentMode=m;targetCount=MODES[m].count;targetHue=MODES[m].hue;modeBtns.forEach(b=>b.classList.toggle('active',b.dataset.mode===m));}
 
 // ── RENDER ────────────────────────────────────────────────────────────────────
@@ -661,12 +785,21 @@ ellipsisBtn.addEventListener('click',()=>{if(state!==S.IDLE)toggleDrawer();});
 controlsLabel.addEventListener('click',()=>{if(state!==S.IDLE)toggleDrawer();});
 controlsLabel.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&state!==S.IDLE){e.preventDefault();toggleDrawer();}});
 document.addEventListener('click',e=>{if(drawerOpen&&!drawer.contains(e.target)&&e.target!==ellipsisBtn&&e.target!==controlsLabel)closeDrawer();});
+drawer.addEventListener('pointermove',resetDrawerAutoHide);
+drawer.addEventListener('focusin',resetDrawerAutoHide);
+drawer.addEventListener('input',resetDrawerAutoHide);
+drawer.addEventListener('change',e=>{
+  if(e.target.matches('input[type="range"]')){
+    setTimeout(closeDrawer,900);
+  }
+});
+drawer.addEventListener('click',resetDrawerAutoHide);
 pauseBtn.addEventListener('click',()=>{if(state===S.ACTIVE)pauseSession();else if(state===S.PAUSED)resumeSession();});
 returnBtn.addEventListener('click',()=>{if(state===S.ACTIVE||state===S.PAUSED)beginEnd();});
-volSlider.addEventListener('input',()=>{volVal=parseInt(volSlider.value);if(state===S.ACTIVE)setVolume(true);});
-toneSlider.addEventListener('input',setTimbre);
-lightSlider.addEventListener('input',()=>{lightVal=parseInt(lightSlider.value);bgDirty=true;});
-modeBtns.forEach(b=>b.addEventListener('click',()=>setMode(b.dataset.mode)));
+volSlider.addEventListener('input',()=>{volVal=parseInt(volSlider.value);if(state===S.ACTIVE)setVolume(true);setTimeout(closeDrawer,350);});
+toneSlider.addEventListener('input',()=>{setTimbre();setTimeout(closeDrawer,350);});
+lightSlider.addEventListener('input',()=>{lightVal=parseInt(lightSlider.value);bgDirty=true;setTimeout(closeDrawer,350);});
+modeBtns.forEach(b=>b.addEventListener('click',()=>{setMode(b.dataset.mode);setTimeout(closeDrawer,350);}));
 
 durationBtns.forEach(b=>b.addEventListener('click',()=>{
   durationBtns.forEach(x=>x.classList.remove('active'));
